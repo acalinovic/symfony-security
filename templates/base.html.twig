@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+        <link rel="stylesheet" href="{{ asset('js/jquery-ui-1.12.1.custom/jquery-ui.min.css') }}">
+
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!<i class="glyphicons glyphicons-user"></i>{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/glyphs.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/social.css') }}">
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery-ui-1.12.1.custom/external/jquery/jquery.js') }}"></script>
+            <script src="{{ asset('js/jquery-ui-1.12.1.custom/jquery-ui.js') }}"></script>
+            <script src="{{ asset('js/main.js') }}"></script>
+        {% endblock %}
+    </head>
+    <body onload="run()" class="container col nowrap stretch">
+    <header id="topHeader" class="back-color container row nowrap ">
+        {% block header %}
+            {% include "home/header.html.twig" %}
+        {% endblock %}
+    </header>
+    <div id="wrapper" class="container row nowrap strech">
+        <nav id="leftMenu" class="back-color container col">
+            {% block nav %}
+            {% endblock %}
+        </nav>
+        <main class="container col nowrap stretch">
+            {% block main %}
+            {% endblock %}
+        </main>
+        <aside id="rightAside" class="back-color container col wrap">
+                <button id="toggleRightAside" onclick="toggleRightAside()">
+                    <i class="glyphicons glyphicons-cube-black "></i>
+                </button>
+            {% block aside %}
+                {% include 'home/aside.html.twig' %}
+            {% endblock %}
+        </aside>
+    </div>
+    <footer id="bottomFooter" class="back-color container row">
+    {% block footer %}
+        {% include 'home/footer.html.twig' %}
+    {% endblock %}
+    </footer>
+    </body>
+</html>

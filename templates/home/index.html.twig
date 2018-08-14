@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Hello!
+{% endblock %}
+{% block header %}
+    {% include "home/header.html.twig" %}
+{% endblock %}
+{% block main %}
+    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+    Welcome {{ app.user }} !!
+    {% else %}
+    {% include "home/main.html.twig" %}
+    {% endif %}
+{% endblock %}

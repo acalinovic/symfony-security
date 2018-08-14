@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/list.css') }}">
+{% endblock %}
+
+{% block title %}User index{% endblock %}
+
+{% block main %}
+    <header id="mainHeader">
+        <h2>User List</h2>
+    </header>
+    <section id="mainContent">
+        {% for user in users %}
+            <h4>{{ user.username }}</h4>
+            <div class="listDetail container row wrap">
+                <p>eMail</p>
+                <p>{{ user.email }}</p>
+                <p>Roles</p>
+                <p>{{ user.roles ? user.roles|join(', ') : '' }}</p>
+                <p>Creation Date</p>
+                <p>{{ user.dateCreation ? user.dateCreation|date('Y-m-d H:i:s') : '' }}</p>
+                <p>Modification Date</p>
+                <p>{{ user.dateModification ? user.dateModification|date('Y-m-d H:i:s') : '' }}</p>
+                <p>Last Access</p>
+                <p>{{ user.dateAccess ? user.dateAccess|date('Y-m-d H:i:s') : '' }}</p>
+                <p>Active Account</p>
+                <p>{{ user.isActive ?
+                    '<i class=" glyphicons glyphicons-check"></i>' :
+                    '<i class=" glyphicons glyphicons-unchecked"></i>' }}
+                </p>
+                <p>Profile</p>
+                {% if user.profile is empty %}
+                    <a href="{{ path('profile_new') }}"><i class=" glyphicons glyphicons-file-plus"></i></a>
+                {% else %}
+                    <a href="{{ path('profile_show', {'id': user.profile.id}) }}"><i
+                                class="black glyphicons glyphicons-eye-open"></i></a>
+                {% endif %}
+                <a href="{{ path('user_show', {'id': user.id}) }}"><i
+                            class=" glyphicons glyphicons-eye-open"></i></a>
+                <a href="{{ path('user_edit', {'id': user.id}) }}"><i class=" glyphicons glyphicons-edit"></i></a>
+            </div>
+        {% else %}
+            <p>no records found</p>
+        {% endfor %}
+    </section>
+    <footer id="mainFooter">
+        <a href="{{ path('user_new') }}">
+            <i class=" glyphicons glyphicons-user-add"></i>
+        </a>
+    </footer>
+
+{% endblock %}

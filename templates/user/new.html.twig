@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %}New User{% endblock %}
+
+{% block main %}
+    <header id="mainHeader">
+        <h1>Create new User</h1>
+    </header>
+    <section id="mainContent">
+        {{ include('user/_form.html.twig') }}
+    </section>
+    <footer id="mainFooter">
+        <a href="{{ path('user_index') }}">
+            <i class="black glyphicons glyphicons-user-add"></i>
+        </a>
+    </footer>
+{% endblock %}

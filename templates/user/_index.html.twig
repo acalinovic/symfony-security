@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/list.css') }}">
+{% endblock %}
+
+{% block title %}User index{% endblock %}
+
+{% block main %}
+    <header id="mainHeader">
+        <h1>User index</h1>
+    </header>
+    <section id="mainContent">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>DateCreation</th>
+                <th>DateModification</th>
+                <th>DateAccess</th>
+                <th>IsActive</th>
+                <th>Profile</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>**********</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
+                    <td>{{ user.dateCreation ? user.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ user.dateModification ? user.dateModification|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ user.dateAccess ? user.dateAccess|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ user.isActive ?
+                        '<i class="black glyphicons glyphicons-check"></i>' :
+                        '<i class="black glyphicons glyphicons-unchecked"></i>' }}
+                    </td>
+                    {% if user.profile is empty %}
+                        <td><a href="{{ path('profile_new') }}"><i class="black glyphicons glyphicons-file-plus"></i></a></td>
+                    {% else %}
+                        <td><a href="{{ path('profile_show', {'id': user.profile.id}) }}">
+                                <i class="black glyphicons glyphicons-eye-open">
+                            </a></td>
+                    {% endif %}
+
+                    <td>
+                        <a href="{{ path('user_show', {'id': user.id}) }}"><i class="black glyphicons glyphicons-eye-open"></i></a>
+                    </td>
+                    <td>
+                        <a href="{{ path('user_edit', {'id': user.id}) }}"><i class="black glyphicons glyphicons-edit"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    <footer id="mainFooter">
+        <a href="{{ path('user_new') }}">
+            <i class="black glyphicons glyphicons-user-add"></i>
+        </a>
+    </footer>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+<div id="topLogo"></div>
+<nav id="topNav" class="container row">
+        <a href="{{ path('home') }}">
+            <i class="glyphicons glyphicons-home"></i>
+            <span class="tooltiptext">Home</span>
+        </a>
+    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+        <a href="{{ path('user_index') }}">
+            <i class="glyphicons glyphicons-user-structure"></i>
+            <span class="tooltiptext">Users</span>
+        </a>
+        <a href="{{ path('profile_index') }}">
+            <i class="glyphicons glyphicons-user-flag"></i>
+            <span class="tooltiptext">Profiles</span>
+        </a>
+    {% endif %}
+</nav>
+<div id="topTools" class="container row">
+    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+        <a href="{{ path('logout') }}">
+            <i class="glyphicons glyphicons-log-out"></i>
+            <span class="tooltiptext">Log Out</span>
+        </a>
+    {% else %}
+        <a href="{{ path('user_registration') }}">
+            <i class="glyphicons glyphicons-registration-mark"></i>
+            <span class="tooltiptext">Register</span>
+        </a>
+        |
+        <a href="{{ path('login') }}">
+            <i class="glyphicons glyphicons-log-in"></i>
+            <span class="tooltiptext">Log In</span>
+        </a>
+    {% endif %}
+
+    <form action="/home" method="post" id="globalSearch" class="container row">
+        <input type="search" />
+    </form>
+    <a href="{{ path('home') }}">
+        <i id="seachButton" class="glyphicons glyphicons-search"></i>
+        <span class="tooltiptext">Launch Search</span>
+    </a>
+</div>

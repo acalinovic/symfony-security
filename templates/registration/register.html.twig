@@ -1,0 +1,14 @@
+{# templates/registration/register.html.twig #}
+{% extends 'base.html.twig' %}
+{% block body %}
+{{ form_start(form) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.plainPassword.first) }}
+    {{ form_row(form.plainPassword.second) }}
+
+    <button type="submit">Register!</button>
+    <button type="reset">Reset</button>
+    <input type="button" name="cancel" value="cancel" onClick="window.location='{{ path('home') }}';" />
+{{ form_end(form) }}
+{% endblock %}
